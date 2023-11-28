@@ -1,3 +1,4 @@
+
 /****************
     Copyright 2022 Jakob Moosbauer
 
@@ -438,43 +439,108 @@ int Scheme::randompath(int steps, long seed){
 	i = last;
       }
     }
-    if(flips.size() == 0){
-      return -1;
-    }
+    if(flips.size() == 0)
+      cout << "no flips!" << endl;
 
-    #ifdef CONTROL
-    for(Flip f:flips){
+    if(rand()%1000==0 or flips.size()==0)
+      {
+	if (rank==23) cout << "s" << step << endl;
+	if (rank==22) {
+	  cout << "GREAT!!!";
+	}
+	int row = rand()%rank;
+	int col = rand()%3;
+	int row2;
+	while((row2 = rand()%rank)==row);
+	rows[rank] = new mat[3];
+	rows[rank][col]=rows[row][col]^rows[row2][col];
+	rows[rank][(col+1)%3]=rows[row][(col+1)%3];
+	rows[rank][(col+2)%3]=rows[row][(col+2)%3];
+	++rank;
+	auto range = xpos[col].equal_range(rows[row][col]);
+	auto i = range.first;
+	while(i->second != row){
+	  ++i;
+	}
+	xpos[col].erase(i);
+	rows[row][col]=rows[row2][col];
+	xpos[col].emplace(rows[row][col],row);
+	if(rand()%2){
+	  int a = col;
+	  int b = plus1mod3[col];
+	  int c = plus2mod3[col];
+	  auto brange = xpos[b].equal_range(rows[row2][b]);
+	  auto i = brange.first;
+	  while(i->second != row2){
+	    ++i;
+	  }
+	  xpos[b].erase(i);
+	  auto crange = xpos[c].equal_range(rows[row][c]);
+	  auto j = crange.first;
+	  while(j->second != row){
+	    ++j;
+	  }
+	  xpos[c].erase(j);
+	  flip(col,row,row2);
+  	  xpos[b].emplace(rows[row2][b],row2);
+	  xpos[c].emplace(rows[row][c],row);
+	}
+	else{
+	  int a = col;
+	  int b = plus1mod3[col];
+	  int c = plus2mod3[col];
+	  auto brange = xpos[b].equal_range(rows[row][b]);
+	  auto i = brange.first;
+	  while(i->second != row){
+	    ++i;
+	  }
+	  xpos[b].erase(i);
+	  auto crange = xpos[c].equal_range(rows[row2][c]);
+	  auto j = crange.first;
+	  while(j->second != row2){
+	    ++j;
+	  }
+	  xpos[c].erase(j);
+	  flip(col,row2,row);
+  	  xpos[b].emplace(rows[row2][b],row);
+	  xpos[c].emplace(rows[row][c],row2);
+	}
+	randompathwithoutreduction(20);
+	xpos[0].clear();
+	xpos[1].clear();
+	xpos[2].clear();	
+	for(auto k = 0; k < rank; ++k){
+	  xpos[0].emplace(rows[k][0],k);
+	  xpos[1].emplace(rows[k][1],k);
+	  xpos[2].emplace(rows[k][2],k);
+	}
+      }
+    else{
+      Flip f = flips[rand()%flips.size()];
+      while(f == lastFlip){
+	f = flips[rand()%flips.size()];
+      }
+      lastFlip = f;
+      int a = f.col;
+      int b = plus1mod3[f.col];
+      int c = plus2mod3[f.col];
+      auto brange = xpos[b].equal_range(rows[f.row2][b]);
+      auto i = brange.first;
+      while(i->second != f.row2){
+	++i;
+      }
+      xpos[b].erase(i);
+      auto crange = xpos[c].equal_range(rows[f.row1][c]);
+      auto j = crange.first;
+      while(j->second != f.row1){
+	++j;
+      }
+      xpos[c].erase(j);
       flip(f);
-      if(reduce())
-	return -6;
-      flip(f);
-    }
-    #endif
-
-    Flip f = flips[rand()%flips.size()];
-    while(f == lastFlip){
-      f = flips[rand()%flips.size()];
-    }
-    lastFlip = f;
-    int a = f.col;
-    int b = plus1mod3[f.col];
-    int c = plus2mod3[f.col];
-    auto brange = xpos[b].equal_range(rows[f.row2][b]);
-    auto i = brange.first;
-    while(i->second != f.row2){
-      ++i;
-    }
-    xpos[b].erase(i);
-    auto crange = xpos[c].equal_range(rows[f.row1][c]);
-    auto j = crange.first;
-    while(j->second != f.row1){
-      ++j;
-    }
-    xpos[c].erase(j);
-    flip(f);
-    xpos[b].emplace(rows[f.row2][b],f.row2);
-    xpos[c].emplace(rows[f.row1][c],f.row1);
+      xpos[b].emplace(rows[f.row2][b],f.row2);
+      xpos[c].emplace(rows[f.row1][c],f.row1);
+    }   
   }
-
+  
   return -1;
 }

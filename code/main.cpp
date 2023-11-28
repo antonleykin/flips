@@ -71,8 +71,15 @@ int main(int argc, char* argv[]){
     do {
       for(int i = 0; i < tries; ++i){
 	steps = s.randompath(pathlength, seed);
+	if(s.rank==22){
+	  string newfilename = s.newfilename();
+	  s.write(newfilename);
+	  cout << newfilename << "," << s.rank << endl;
+	  writelog(filename, newfilename, stepsum, oldrank, s.rank);	  
+	}
 	if(steps >= 0){
 	  stepsum += steps;
+	  cout << "r" << s.rank << ">" << stepsum << endl;
 	  break;
 	}
       }
