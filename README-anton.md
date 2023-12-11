@@ -1,5 +1,4 @@
 # Interesting cases
-
 * 666: want < 161
 * 555: 95 doesn't lift
 * 444: <47, also generate 48 that is "stable" (doesn't go to 47 easily)
@@ -30,3 +29,11 @@ cd 666
 echo 666; for ((N=161; N<=169; N++)); do echo "$N => `grep "r$N" 666.out | wc -l`"; done
 ```
 
+# Wish list
+* ability to set a random seed
+* a heuristic for knowing that a vertex could be interesting (when to dump a decomposition?)
+  * e.g., quick check for liftability
+* ability to accumulate more statistics
+  * could be useful to detect why processes get killed (my runs end in `Killed: 9`)
+    
+  
