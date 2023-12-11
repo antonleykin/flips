@@ -62,7 +62,7 @@ int main(int argc, char* argv[]){
 
   
   int steps = -1;
-  int stepsum = 0;
+  unsigned long long stepsum = 0;
 
   if(tries == 0){
     stepsum = s.randompath(pathlength,seed);

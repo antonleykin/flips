@@ -442,12 +442,9 @@ int Scheme::randompath(int steps, long seed){
     if(flips.size() == 0)
       cout << "no flips!" << endl;
 
-    if(rand()%1000==0 or flips.size()==0)
+    if(rand()%10000==0 or flips.size()==0)
       {
-	if (rank==23) cout << "s" << step << endl;
-	if (rank==22) {
-	  cout << "GREAT!!!";
-	}
+	cout << "s" << step << "r" << rank << endl;
 	int row = rand()%rank;
 	int col = rand()%3;
 	int row2;
