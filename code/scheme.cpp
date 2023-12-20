@@ -344,6 +344,7 @@ bool Scheme::reduce(){
       delete[] ccomb;
     }
   }
+  delete[] xpos;
   return false;
 }
 

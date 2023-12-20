@@ -1,3 +1,4 @@
+
 /****************
     Copyright 2022 Jakob Moosbauer
 
@@ -31,6 +32,7 @@ int Scheme::randompath(int steps, long seed){
 
   //check for instant reduction
   if(reduce()){
+    delete[] xpos;
     return 0;
   }
 
@@ -67,8 +69,10 @@ int Scheme::randompath(int steps, long seed){
 		  flip(a, k->second, j->second);
 		  if(!reduce()){
 		    mylog("49");
+		    delete[] xpos;
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rk[c] == ri1[c]){
@@ -77,6 +81,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("57");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -88,6 +93,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("68");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rk[c] == (ri1[c]^ri2[c])){
@@ -96,6 +102,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("76");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rj[c] == (ri1[c]^ri2[c])){
@@ -104,6 +111,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("84");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rj[c] == ri1[c] || rj[c] == ri2[c]){
@@ -112,6 +120,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("92");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rk[c] == ri1[c] || rk[c] == ri2[c]){
@@ -120,6 +129,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("100");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -142,6 +152,9 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("122");
 		    return -5;
 		  }
+		  delete[] apool;
+		  delete[] cpool;
+		  delete[] xpos;
 		  return step;
 		}
 		ife(cpool[d+1]==0){
@@ -150,6 +163,9 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("130");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] apool;
+		  delete[] cpool;
 		  return step;
 		}
 		ife(apool[d]==0){
@@ -158,6 +174,9 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("138");
 		    return -5;
 		  }
+		  delete[] apool;
+		  delete[] cpool;
+		  delete[] xpos;
 		  return step;
 		}
 		delete[] apool;
@@ -179,6 +198,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("159");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rk[b] == (ri1[b]^ri2[b])){
@@ -187,6 +207,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("167");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -205,6 +226,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("185");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] bpool;
 		  return step;
 		}
 		ife(bpool[d+1]==0){
@@ -213,6 +236,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("193");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] bpool;
 		  return step;
 		}
 		delete[] bpool;
@@ -246,6 +271,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("226");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -266,6 +292,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("248");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] bpool;
 		  return step;
 		}
 		delete[] bpool;
@@ -299,6 +327,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("279");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -319,6 +348,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("299");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] bpool;
 		  return step;
 		}
 		delete[] bpool;
@@ -352,6 +383,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("332");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -372,6 +404,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("352");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] cpool;
 		  return step;
 		}
 		delete[] cpool;
@@ -405,6 +439,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("385");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -425,6 +460,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("405");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] cpool;
 		  return step;
 		}
 		delete[] cpool;
@@ -438,43 +475,106 @@ int Scheme::randompath(int steps, long seed){
 	i = last;
       }
     }
-    if(flips.size() == 0){
-      return -1;
-    }
+    if(flips.size() == 0)
+      cout << "no flips!" << endl;
 
-    #ifdef CONTROL
-    for(Flip f:flips){
+    if(rand()%10000==0 or flips.size()==0)
+      {
+	cout << "s" << step << "r" << rank << endl;
+	int row = rand()%rank;
+	int col = rand()%3;
+	int row2;
+	while((row2 = rand()%rank)==row);
+	rows[rank] = new mat[3];
+	rows[rank][col]=rows[row][col]^rows[row2][col];
+	rows[rank][(col+1)%3]=rows[row][(col+1)%3];
+	rows[rank][(col+2)%3]=rows[row][(col+2)%3];
+	++rank;
+	auto range = xpos[col].equal_range(rows[row][col]);
+	auto i = range.first;
+	while(i->second != row){
+	  ++i;
+	}
+	xpos[col].erase(i);
+	rows[row][col]=rows[row2][col];
+	xpos[col].emplace(rows[row][col],row);
+	if(rand()%2){
+	  int a = col;
+	  int b = plus1mod3[col];
+	  int c = plus2mod3[col];
+	  auto brange = xpos[b].equal_range(rows[row2][b]);
+	  auto i = brange.first;
+	  while(i->second != row2){
+	    ++i;
+	  }
+	  xpos[b].erase(i);
+	  auto crange = xpos[c].equal_range(rows[row][c]);
+	  auto j = crange.first;
+	  while(j->second != row){
+	    ++j;
+	  }
+	  xpos[c].erase(j);
+	  flip(col,row,row2);
+  	  xpos[b].emplace(rows[row2][b],row2);
+	  xpos[c].emplace(rows[row][c],row);
+	}
+	else{
+	  int a = col;
+	  int b = plus1mod3[col];
+	  int c = plus2mod3[col];
+	  auto brange = xpos[b].equal_range(rows[row][b]);
+	  auto i = brange.first;
+	  while(i->second != row){
+	    ++i;
+	  }
+	  xpos[b].erase(i);
+	  auto crange = xpos[c].equal_range(rows[row2][c]);
+	  auto j = crange.first;
+	  while(j->second != row2){
+	    ++j;
+	  }
+	  xpos[c].erase(j);
+	  flip(col,row2,row);
+  	  xpos[b].emplace(rows[row2][b],row);
+	  xpos[c].emplace(rows[row][c],row2);
+	}
+	randompathwithoutreduction(20);
+	xpos[0].clear();
+	xpos[1].clear();
+	xpos[2].clear();	
+	for(auto k = 0; k < rank; ++k){
+	  xpos[0].emplace(rows[k][0],k);
+	  xpos[1].emplace(rows[k][1],k);
+	  xpos[2].emplace(rows[k][2],k);
+	}
+      }
+    else{
+      Flip f = flips[rand()%flips.size()];
+      while(f == lastFlip){
+	f = flips[rand()%flips.size()];
+      }
+      lastFlip = f;
+      int a = f.col;
+      int b = plus1mod3[f.col];
+      int c = plus2mod3[f.col];
+      auto brange = xpos[b].equal_range(rows[f.row2][b]);
+      auto i = brange.first;
+      while(i->second != f.row2){
+	++i;
+      }
+      xpos[b].erase(i);
+      auto crange = xpos[c].equal_range(rows[f.row1][c]);
+      auto j = crange.first;
+      while(j->second != f.row1){
+	++j;
+      }
+      xpos[c].erase(j);
       flip(f);
-      if(reduce())
-	return -6;
-      flip(f);
+      xpos[b].emplace(rows[f.row2][b],f.row2);
+      xpos[c].emplace(rows[f.row1][c],f.row1);
     }
-    #endif
-
-    Flip f = flips[rand()%flips.size()];
-    while(f == lastFlip){
-      f = flips[rand()%flips.size()];
-    }
-    lastFlip = f;
-    int a = f.col;
-    int b = plus1mod3[f.col];
-    int c = plus2mod3[f.col];
-    auto brange = xpos[b].equal_range(rows[f.row2][b]);
-    auto i = brange.first;
-    while(i->second != f.row2){
-      ++i;
-    }
-    xpos[b].erase(i);
-    auto crange = xpos[c].equal_range(rows[f.row1][c]);
-    auto j = crange.first;
-    while(j->second != f.row1){
-      ++j;
-    }
-    xpos[c].erase(j);
-    flip(f);
-    xpos[b].emplace(rows[f.row2][b],f.row2);
-    xpos[c].emplace(rows[f.row1][c],f.row1);
   }
 
+  delete[] xpos;
   return -1;
 }
