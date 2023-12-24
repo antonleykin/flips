@@ -50,16 +50,18 @@ int main(int argc, char* argv[]){
   Scheme s = Scheme(filename,n,m,l);
 
   int oldrank = s.rank;
-  
+  int bestRank = s.rank;
+    
   if(!s.check()){
     cerr << "Opened incorrect scheme: " << filename << endl;
     return 1;
   }
   
-  struct timespec ts;
-  clock_gettime(CLOCK_MONOTONIC, &ts);
-  long seed = (long)ts.tv_nsec;
+  //struct timespec ts;
+  //clock_gettime(CLOCK_MONOTONIC, &ts);
+  //long seed = (long)ts.tv_nsec;
 
+  long seed = 0; // need to be deterministic
   
   int steps = -1;
   unsigned long long stepsum = 0;
@@ -71,11 +73,12 @@ int main(int argc, char* argv[]){
     do {
       for(int i = 0; i < tries; ++i){
 	steps = s.randompath(pathlength, seed);
-	if(s.rank==22){
+	if(s.rank<bestRank){
 	  string newfilename = s.newfilename();
 	  s.write(newfilename);
 	  cout << newfilename << "," << s.rank << endl;
-	  writelog(filename, newfilename, stepsum, oldrank, s.rank);	  
+	  writelog(filename, newfilename, stepsum, bestRank, s.rank);	  
+	  bestRank = s.rank;
 	}
 	if(steps >= 0){
 	  stepsum += steps;
@@ -84,7 +87,11 @@ int main(int argc, char* argv[]){
 	}
       }
     }
-    while(steps >= 0);
+    while(steps >= 0 and stepsum < pathlength);
+    if(stepsum >= pathlength)
+      cerr << endl << stepsum << " EXCEEDED " << pathlength << " steps. STOPPING." << endl;
+    else 
+      cerr << "ERROR (steps < 0). STOPPING." << endl; 
   }
 
 #ifdef DEBUG
