@@ -32,6 +32,7 @@ int Scheme::randompath(int steps, long seed){
 
   //check for instant reduction
   if(reduce()){
+    delete[] xpos;
     return 0;
   }
 
@@ -68,8 +69,10 @@ int Scheme::randompath(int steps, long seed){
 		  flip(a, k->second, j->second);
 		  if(!reduce()){
 		    mylog("49");
+		    delete[] xpos;
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rk[c] == ri1[c]){
@@ -78,6 +81,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("57");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -89,6 +93,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("68");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rk[c] == (ri1[c]^ri2[c])){
@@ -97,6 +102,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("76");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rj[c] == (ri1[c]^ri2[c])){
@@ -105,6 +111,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("84");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rj[c] == ri1[c] || rj[c] == ri2[c]){
@@ -113,6 +120,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("92");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rk[c] == ri1[c] || rk[c] == ri2[c]){
@@ -121,6 +129,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("100");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -143,6 +152,9 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("122");
 		    return -5;
 		  }
+		  delete[] apool;
+		  delete[] cpool;
+		  delete[] xpos;
 		  return step;
 		}
 		ife(cpool[d+1]==0){
@@ -151,6 +163,9 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("130");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] apool;
+		  delete[] cpool;
 		  return step;
 		}
 		ife(apool[d]==0){
@@ -159,6 +174,9 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("138");
 		    return -5;
 		  }
+		  delete[] apool;
+		  delete[] cpool;
+		  delete[] xpos;
 		  return step;
 		}
 		delete[] apool;
@@ -180,6 +198,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("159");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 		ife(rk[b] == (ri1[b]^ri2[b])){
@@ -188,6 +207,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("167");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -206,6 +226,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("185");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] bpool;
 		  return step;
 		}
 		ife(bpool[d+1]==0){
@@ -214,6 +236,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("193");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] bpool;
 		  return step;
 		}
 		delete[] bpool;
@@ -247,6 +271,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("226");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -267,6 +292,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("248");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] bpool;
 		  return step;
 		}
 		delete[] bpool;
@@ -300,6 +327,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("279");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -320,6 +348,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("299");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] bpool;
 		  return step;
 		}
 		delete[] bpool;
@@ -353,6 +383,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("332");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -373,6 +404,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("352");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] cpool;
 		  return step;
 		}
 		delete[] cpool;
@@ -406,6 +439,7 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("385");
 		    return -5;
 		  }
+		  delete[] xpos;
 		  return step;
 		}
 	      }
@@ -426,6 +460,8 @@ int Scheme::randompath(int steps, long seed){
 		    mylog("405");
 		    return -5;
 		  }
+		  delete[] xpos;
+		  delete[] cpool;
 		  return step;
 		}
 		delete[] cpool;
@@ -536,8 +572,9 @@ int Scheme::randompath(int steps, long seed){
       flip(f);
       xpos[b].emplace(rows[f.row2][b],f.row2);
       xpos[c].emplace(rows[f.row1][c],f.row1);
-    }   
+    }
   }
-  
+
+  delete[] xpos;
   return -1;
 }
